@@ -1,4 +1,4 @@
-;; Desactiva la barra de herramientas
+ ;; Desactiva la barra de herramientas
 (menu-bar-mode -1)
 
 ;; Desactiva la barra de menú
@@ -26,7 +26,7 @@
 ;; Cambia al buffer seleccionado
 (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
 ;; Comenta una línea
-(global-set-key (kbd "C-c C-c") 'comment-line)
+(global-set-key (kbd "C-c C-f") 'comment-line)
 ;; Comenta una región
 (global-set-key (kbd "C-c C-r") 'comment-or-uncomment-region)
 ;; Duplica una línea de código actual
@@ -59,6 +59,35 @@
   (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
+
+;; Autocompletado con company
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  (add-to-list 'company-backends 'company-clang))
+
+;; Mejora la navegación con ivy
+(use-package ivy
+  :ensure t
+  :init (ivy-mode 1)
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) "))
+
+;; Mejoramiento de counsel
+(use-package counsel
+  :ensure t
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file)
+	 ("C-c k" . counsel-rg)))
+
+;; Aplica company-mode para código en C y C++
+(use-package cc-mode
+  :ensure t
+  :config
+  (add-hook 'c-mode-hook 'company-mode)
+  (add-hook 'c++-mode-hook 'company-mode))
 
 ;; Indentacion de C y C++
 (defun my-c-mode-hook()
@@ -104,26 +133,6 @@
   :ensure t
   :commands lsp-ui-mode)
 
-;; Autocompletado con company
-(use-package company
-  :ensure t
-  :init (global-company-mode 1))
-
-;; Mejora la navegación con ivy
-(use-package ivy
-  :ensure t
-  :init (ivy-mode 1)
-  :config
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) "))
-
-;; Mejoramiento de counsel
-(use-package counsel
-  :ensure t
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)
-	 ("C-c k" . counsel-rg)))
-
 ;;(use-package flycheck
 ;;  :ensure t
 ;;  :init (global-flycheck-mode 1))
@@ -131,6 +140,9 @@
 ;;(use-package yasnippet
 ;;  :ensure t
 ;;  :init (yas-global-mode 1))
+
+;; C#-mode
+(use-package csharp-mode)
 
 ;; Ruby-mode
 (use-package ruby-mode)
@@ -174,7 +186,7 @@
 (setq org-startup-with-inline-images t)
 ;; Permite el resaltado de sintaxis en bloques de código
 (setq org-src-fontify-natively t)
-;; Asegura que los bloques de códifo se alineen correctamente
+;; Asegura que los bloques de código se alineen correctamente
 (setq org-edit-src-content-indentation 0)
 ;; Mostrar encabezados en org-mode con símbolos
 ;;(use-package org-bullets
@@ -234,7 +246,7 @@
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(rego-mode dracula-theme haskell-mode use-package)))
+   '(cmake-mode rego-mode dracula-theme haskell-mode use-package)))
 
 ;; Habilita la visualización de la línea actual resaltada en
 ;; todos los buffers
