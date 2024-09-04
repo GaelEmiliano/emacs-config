@@ -154,6 +154,13 @@
   (setq dracula-theme t)
   (load-theme 'dracula t))
 
+;; Configuración de CMake
+(use-package cmake-mode
+  :ensure t
+  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'")
+  :init
+  (setq cmake-tab-width 4)) ;; Indentación
+
 ;; Colorea qué paréntesis cierra con cuál
 ;; (use-package rainbow-delimiters
   ;; :hook (prog-mode . rainbow-delimiters-mode))
