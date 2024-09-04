@@ -154,6 +154,33 @@
   (setq dracula-theme t)
   (load-theme 'dracula t))
 
+;; Configuración de Markdown (lenguaje de marcado)
+;; C-c C-c p (markdown-preview) Como se ve renderizado
+;; M-RET nuevo encabezado
+;; C-c C-s b: insertar texto en negritas
+;; C-c C-s i: Insertar texto en itálicas
+;; C-c C-c l: insertar un enlace
+;; C-c C-c i: insertar una imagen
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.md\\'" "\\.markdown\\'")
+  :init
+  (setq markdown-command "multimarkdown")
+  :config
+  (setq markdown-fontify-code-blocks-natively t))
+
+;; Configuraciín de Org-mode
+;; Habilitar el soporte para imágenes en línea
+(setq org-startup-with-inline-images t)
+;; Permite el resaltado de sintaxis en bloques de código
+(setq org-src-fontify-natively t)
+;; Asegura que los bloques de códifo se alineen correctamente
+(setq org-edit-src-content-indentation 0)
+;; Mostrar encabezados en org-mode con símbolos
+;;(use-package org-bullets
+  ;; :ensure t
+  ;; :hook (org-mode . org-bullets-mode))
+
 ;; Configuración de CMake
 (use-package cmake-mode
   :ensure t

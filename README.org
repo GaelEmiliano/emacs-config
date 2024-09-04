@@ -1,0 +1,8 @@
+* Mi Configuración de Emacs
+Este archivo documenta la configuración de Emacs que utilizo, definida en mi archivo ~init.el~.
+Incluye la instalación de paquetes, personalizaciones de la interfaz de usuario, atajos de teclado
+personalizados, y configuraciones para diferentes lenguajes de programación.
+
+** Instalación de Paquetes
+Para manejar paquetes en Emacs, utilizo ~use-package~. Esta configuración asegura que los paquetes
+necesarios se instalan automáticamente si no están presentes.
