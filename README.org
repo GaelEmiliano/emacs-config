@@ -6,3 +6,75 @@ personalizados, y configuraciones para diferentes lenguajes de programación.
 ** Instalación de Paquetes
 Para manejar paquetes en Emacs, utilizo ~use-package~. Esta configuración asegura que los paquetes
 necesarios se instalan automáticamente si no están presentes.
+
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+	("elpa" . "https://elpa.gnu.org/packages/")))
+(package-initialize)
+(package-refresh-contents)
+(unless package-archive-contents
+  (package-refresh-contents))
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t)
+#+END_SRC
+
+** Personalización de la Interfaz de Usuario
+Estas configuraciones están diseñadas para mejorar la interfaz Emacs, haciéndola más minimalista y
+funcional.
+
+- Ocultar la barra de herramientas y la barra de menú para ahorrar espacio.
+- Mostrar líneas de números relativos para facilitar la navegación.
+- Cambiar el tipo de letra predeterminada.
+
+#+BEGIN_SRC emacs-lisp
+;; Desactiva la barra de herramientas
+(menu-bar-mode -1)
+;; Desactiva la barra de menú
+(tool-bar-mode -1)
+;; Muestra la barra de desplazamiento
+(scroll-bar-mode t)
+;; Añadimos las líneas a la izquierda
+(global-display-line-numbers-mode 1)
+;; Usa números de línea relativos
+(setq display-line-numbers-type 'relative)
+;; Cambia el tipo de letra a "Dejavu Sans Mono 11"
+(set-face-attribute 'default nil :font "DejaVu Sans Mono-11")
+#+END_SRC 
+
+** Atajos de teclado personalizados
+Defino varios atajos de teclado para facilitar la navegación y la edición de texto en Emacs.
+Además de definir una función para duplicar una línea de texto, código, etc.
+
+#+BEGIN_SRC emacs-lisp
+;; Movernos al siguiente buffer
+(global-set-key (kbd "C-x C-?") 'next-buffer)
+;; Movernos al buffer anterior
+(global-set-key (kbd "C-x C-p") 'previous-buffer)
+;; Cambiar entre buffers
+(global-set-key (kbd "C-x C-o") 'other-window-backward)
+;; Agrega un comentario, lo quita, o lo añade al final
+(global-set-key (kbd "C-x ,") 'comment-dwim)
+;; Cambia al buffer seleccionado
+(global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+;; Comenta una línea
+(global-set-key (kbd "C-c C-c") 'comment-line)
+;; Comenta una región
+(global-set-key (kbd "C-c C-r") 'comment-or-uncomment-region)
+;; Duplica una línea de código actual
+(global-set-key (kbd "C-c d") 'duplicate-line)
+
+;; Función que duplica línea de código actual
+(defun duplicate-line()
+  "Duplicate current line"
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (open-line 1)
+  (next-line 1)
+  (yank))
+#+END_SRC

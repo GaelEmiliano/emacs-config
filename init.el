@@ -1,4 +1,4 @@
- ;; Desactiva la barra de herramientas
+;; Desactiva la barra de herramientas
 (menu-bar-mode -1)
 
 ;; Desactiva la barra de menú
