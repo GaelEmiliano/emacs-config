@@ -29,7 +29,7 @@
 (global-set-key (kbd "C-c C-f") 'comment-line)
 ;; Comenta una región
 (global-set-key (kbd "C-c C-r") 'comment-or-uncomment-region)
-;; Duplica una línea de código actual
+;; Duplica una línea de código o texto actual
 (global-set-key (kbd "C-c d") 'duplicate-line)
 
 ;; Función que duplica línea de código actual
@@ -89,19 +89,18 @@
   (add-hook 'c-mode-hook 'company-mode)
   (add-hook 'c++-mode-hook 'company-mode))
 
-;; Indentacion de C y C++
+;; Indentación de C y C++
 (defun my-c-mode-hook()
   (setq c-basic-offset 4)
-  (setq tab-width 4)
-  (setq indent-tabs-mode nil))
+  (setq tab-width 4))
 ;; Establece la nueva indentacion a 4 espacios
 (add-hook 'c-mode-common-hook 'my-c-mode-hook)
 
-;; Indentacion de Python
+;; Indentación de Python
 (defun my-python-mode-hook()
   (setq python-indent-offset 4)
   (setq tab-width 4)
-  (setq indent-tabs-mode nil))
+  (setq python-shell-interpreter "python3"))
 ;; Establece la nueva indentacion a 4 espacios
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 
@@ -110,11 +109,11 @@
   :ensure t
   :mode "\\.go\\'"
   :config
-  (setq tab-width 4) ;; Ancho de tabulación a 4 espacios
-  (setq gofmt-command "gofmt") ;; Usar gofmt para formatear el código
-  (add-hook 'before-save-hook 'gofmt-before-save) ;; Formatear
-  (setq indent-tabs-mode nil) ;, Usar espacios en lugar de tabs
-  (setq go-tab-width 4)) ;; Especificamente para Go
+  (setq tab-width 4)
+  (setq gofmt-command "gofmt")
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (setq indent-tabs-mode nil)
+  (setq go-tab-width 4))
 
 ;; Configuración de Rust
 (use-package rust-mode
@@ -123,6 +122,46 @@
   :config
   (setq rust-format-on-save t))
 
+;; C#-mode
+(use-package csharp-mode
+  :ensure t
+  :mode "\\.cs\\'"
+  :config
+  (setq c-basic-offset 4))
+
+;; Ruby-mode
+(use-package ruby-mode
+  :mode "\\.rb\\'"
+  :interpreter "ruby"
+  :config
+  (setq ruby-indent-level 2))
+
+;; Kotlin-mode
+(use-package kotlin-mode
+  :ensure t
+  :mode "\\.kt\\'"
+  :config
+  (setq kotlin-tab-width 4))
+
+;; Haskell-mode
+(use-package haskell-mode
+  :ensure t
+  :mode "\\.hs\\'"
+  :config
+  (setq haskell-indentation-layout-offset 4)
+  (setq haskell-indentation-starter-offset 4))
+
+;; Php-mode
+(use-package php-mode)
+
+;; Racket-mode
+(use-package racket-mode
+  :ensure t
+  :mode "\\.rkt\\'"
+  :config
+  (setq racket-indent-offset 2))
+
+;; Language Server Protocol (LSP)
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
@@ -140,24 +179,6 @@
 ;;(use-package yasnippet
 ;;  :ensure t
 ;;  :init (yas-global-mode 1))
-
-;; C#-mode
-(use-package csharp-mode)
-
-;; Ruby-mode
-(use-package ruby-mode)
-
-;; Kotlin-mode
-(use-package kotlin-mode)
-
-;; Haskell-mode
-(use-package haskell-mode)
-
-;; Php-mode
-(use-package php-mode)
-
-;; Racket-mode
-(use-package racket-mode)
 
 ;; Dracula Theme
 (use-package dracula-theme
