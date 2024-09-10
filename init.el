@@ -112,7 +112,6 @@
   (setq tab-width 4)
   (setq gofmt-command "gofmt")
   (add-hook 'before-save-hook 'gofmt-before-save)
-  (setq indent-tabs-mode nil)
   (setq go-tab-width 4))
 
 ;; Configuración de Rust
@@ -187,6 +186,18 @@
   (setq dracula-theme t)
   (load-theme 'dracula t))
 
+;; Instala y configura Doom Modeline
+;; (use-package doom-modeline
+  ;; :ensure t
+  ;; :init (doom-modeline-mode 1)
+  ;; :custom
+  ;; (doom-modeline-height 25) ;; Altura barra de estado
+  ;; (doom-modeline-icon t)) ;; Activa uso de íconos
+
+;; Instala y configura All The Icons
+;; (use-package all-the-icons
+  ;; :ensure t)
+
 ;; Configuración de Markdown (lenguaje de marcado)
 ;; C-c C-c p (markdown-preview) Como se ve renderizado
 ;; M-RET nuevo encabezado
@@ -222,8 +233,8 @@
   (setq cmake-tab-width 4)) ;; Indentación
 
 ;; Colorea qué paréntesis cierra con cuál
-;; (use-package rainbow-delimiters
-  ;; :hook (prog-mode . rainbow-delimiters-mode))
+ ;;(use-package rainbow-delimiters
+   ;;:hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Ayuda para recomendar combinaciones de teclas
 (use-package which-key
@@ -267,14 +278,13 @@
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(cmake-mode rego-mode dracula-theme haskell-mode use-package)))
+   '(all-the-icons cmake-mode rego-mode dracula-theme haskell-mode use-package)))
 
 ;; Habilita la visualización de la línea actual resaltada en
 ;; todos los buffers
 (global-hl-line-mode 1)
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(hl-line ((t (:background "#483d8b")))))
+ ;;'(hl-line ((t (:background "#483d8b"))))
+ ;;'(show-paren-match ((t (:background "cyan" :foreground "black" :weight bold))))
+ ;;'(show-paren-mismatch ((t (:background "orange" :foreground "black" :weight bold))))
+ )
