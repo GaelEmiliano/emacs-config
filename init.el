@@ -107,9 +107,9 @@
 ;; Configuración de Golang
 (use-package go-mode
   :ensure t
-  :mode "\\.go\\'"
+  :mode ("\\.go\\'" . go-mode)
   :config
-  (setq tab-width 4)
+  (setq-default tab-width 4)
   (setq gofmt-command "gofmt")
   (add-hook 'before-save-hook 'gofmt-before-save)
   (setq go-tab-width 4))
@@ -186,17 +186,24 @@
   (setq dracula-theme t)
   (load-theme 'dracula t))
 
+;; Zenburn Theme
+;; (use-package zenburn-theme
+;;   :ensure t
+;;   :init
+;;   (setq zenburn-theme t)
+;;   (load-theme 'zenburn t))
+
 ;; Instala y configura Doom Modeline
 ;; (use-package doom-modeline
-  ;; :ensure t
-  ;; :init (doom-modeline-mode 1)
-  ;; :custom
-  ;; (doom-modeline-height 25) ;; Altura barra de estado
-  ;; (doom-modeline-icon t)) ;; Activa uso de íconos
+;;   :ensure t
+;;   :init (doom-modeline-mode 1)
+;;   :custom
+;;   (doom-modeline-height 25) ;; Altura barra de estado
+;;   (doom-modeline-icon t)) ;; Activa uso de íconos
 
-;; Instala y configura All The Icons
+;; ;; Instala y configura All The Icons
 ;; (use-package all-the-icons
-  ;; :ensure t)
+;;   :ensure t)
 
 ;; Configuración de Markdown (lenguaje de marcado)
 ;; C-c C-c p (markdown-preview) Como se ve renderizado
@@ -246,6 +253,10 @@
 ;; Mostrar paréntesis coincidentes
 (show-paren-mode 1)
 
+;; Habilita la visualización de la línea actual resaltada en
+;; todos los buffers
+(global-hl-line-mode 1)
+
 ;; Habilita cambiar de ventana usando Shift + flechas
 (windmove-default-keybindings)
 
@@ -278,13 +289,10 @@
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(all-the-icons cmake-mode rego-mode dracula-theme haskell-mode use-package)))
+   '(cmake-mode rego-mode dracula-theme haskell-mode use-package)))
 
-;; Habilita la visualización de la línea actual resaltada en
-;; todos los buffers
-(global-hl-line-mode 1)
 (custom-set-faces
- ;;'(hl-line ((t (:background "#483d8b"))))
  ;;'(show-paren-match ((t (:background "cyan" :foreground "black" :weight bold))))
- ;;'(show-paren-mismatch ((t (:background "orange" :foreground "black" :weight bold))))
- )
+ ;;'(show-paren-mismatch ((t (:background "#orange" :foreground "black" :weight bold))))
+ '(line-number ((t (:foreground "#6c757d"))))
+ '(line-number-current-line ((t (:background "#3a3c4e" :foreground "#8be9fd" :weight bold)))))
